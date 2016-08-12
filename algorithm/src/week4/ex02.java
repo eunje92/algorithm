@@ -1,5 +1,6 @@
 package week4;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class ex02 {
@@ -13,21 +14,26 @@ public class ex02 {
 		
 		num=new int[n+1];
 		
-		num[0]=0;
+		num[0]=-1;
 		for(int i=1; i<n+1; i++){
 			num[i]=sc.nextInt();
 		}
-		
+		Arrays.fill(memo,-1);
 		System.out.println(lis(0)-1);
 	}
 	
 	int lis(int here){
+		if(here==n+1){
+			return 1;
+		}
 		int ret=memo[here];
 		
-		if(ret==-1) return ret;
+		if(ret!=-1){
+			return ret;
+		}
 		
 		ret=1;
-		for(int next=here+1; next<num.length; next++){
+		for(int next=here+1; next<n+1; next++){
 			if(num[here]<num[next]){
 				ret=Math.max(ret, lis(next)+1);
 			}
